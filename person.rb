@@ -1,4 +1,6 @@
 require './nameable'
+require './capitalize_decorator'
+require './trimmer_decorator'
 
 class Person < Nameable
   attr_accessor :name, :age
@@ -25,5 +27,3 @@ class Person < Nameable
     @age >= 18
   end
 end
-
-puts Person.new(10, 'gedewon').can_use_services?
