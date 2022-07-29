@@ -39,7 +39,7 @@ class App
       print 'Has parent permission? [Y/N]: '
       permission = gets[0]
       permission = (permission == ('Y' || 'y'))
-      @persons << Student.new('Unkown', age, name, permission)
+      @persons << Student.new('Unkown', age, name, parent_permission: permission)
       puts "Person created successfully \n\n"
     when 2
       print 'Specialization: '
