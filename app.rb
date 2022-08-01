@@ -30,21 +30,21 @@ class App
     puts '1. Student'
     puts '2. Teacher'
     print 'Enter selection: '
-    person_type = Inputs.new.int_input()
+    person_type = Inputs.new.int_input
     print 'Name: '
-    name = Inputs.new.str_input()
+    name = Inputs.new.str_input
     print 'Age : '
-    age = Inputs.new.int_input()
+    age = Inputs.new.int_input
     case person_type
     when 1
       print 'Has parent permission? [Y/N]: '
       permission = Inputs.new.bol_input
-      permission = (permission == 'Y' )
+      permission = (permission == 'Y')
       @persons << Student.new('Unkown', age, name, parent_permission: permission)
       puts "Person created successfully \n\n"
     when 2
       print 'Specialization: '
-      specialization = Inputs.new.str_input()
+      specialization = Inputs.new.str_input
       @persons << Teacher.new(specialization, age, name)
       puts "Person created successfully\n\n"
     end
@@ -53,9 +53,9 @@ class App
   def create_book
     puts 'Create a book'
     print 'Title: '
-    title = Inputs.new.str_input()
+    title = Inputs.new.str_input
     print 'Author: '
-    author = Inputs.new.str_input()
+    author = Inputs.new.str_input
     @books << Book.new(title, author)
     puts "Book created successfully\n\n"
   end
@@ -64,14 +64,14 @@ class App
     puts 'Create rental'
     puts 'Select a book from the following list by number'
     @books.each_with_index { |book, index| puts "#{index}) Title: \"#{book.title}\", Author: #{book.author}" }
-    book_number = Inputs.new.int_input()
+    book_number = Inputs.new.int_input
     puts 'Select a Person from the following list by number'
     @persons.each_with_index do |person, index|
       puts " #{index}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
     end
-    person_number = Inputs.new.int_input()
+    person_number = Inputs.new.int_input
     print 'Date: '
-    date = Inputs.new.str_input()
+    date = Inputs.new.str_input
     @rentals << Rental.new(date, @books[book_number], @persons[person_number])
     puts "Rental created successfully \n\n"
   end
@@ -79,7 +79,7 @@ class App
   def list_rentals
     puts 'List all rentals'
     print 'Enter ID of person: '
-    person_id = Inputs.new.str_input()
+    person_id = Inputs.new.str_input
     puts 'Rentals : '
     @rentals.each do |rent|
       if rent.person.id.to_s == person_id.to_s
