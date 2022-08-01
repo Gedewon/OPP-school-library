@@ -17,9 +17,9 @@ class Menu
       case input
       when 1 then app.list_books
       when 2 then app.list_people
-      when 3 then app.create_person
-      when 4 then app.create_book
-      when 5 then app.create_rental
+      when 3 then app.promte_create_person
+      when 4 then app.promte_create_book
+      when 5 then app.promte_create_rental
       when 6 then app.list_rentals
       else break
       end

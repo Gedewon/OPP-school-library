@@ -25,7 +25,7 @@ class App
     puts ''
   end
 
-  def create_person # rubocop:disable Metrics/MethodLength
+  def promte_create_person
     puts 'Which type of person you wish to create'
     puts '1. Student'
     puts '2. Teacher'
@@ -35,6 +35,10 @@ class App
     name = Inputs.new.str_input
     print 'Age : '
     age = Inputs.new.int_input
+    create_person(person_type, name, age)
+  end
+
+  def create_person(person_type, name, age)
     case person_type
     when 1
       print 'Has parent permission? [Y/N]: '
@@ -50,30 +54,44 @@ class App
     end
   end
 
-  def create_book
+  def promte_create_book
     puts 'Create a book'
     print 'Title: '
-    title = Inputs.new.str_input
+    title = get_user_selection('String')
     print 'Author: '
-    author = Inputs.new.str_input
-    @books << Book.new(title, author)
+    author = get_user_selection('String')
+    create_book(author, title)
     puts "Book created successfully\n\n"
   end
 
-  def create_rental
+  def create_book(author, title)
+    @books << Book.new(title, author)
+  end
+
+  def promte_create_rental
     puts 'Create rental'
     puts 'Select a book from the following list by number'
     @books.each_with_index { |book, index| puts "#{index}) Title: \"#{book.title}\", Author: #{book.author}" }
-    book_number = Inputs.new.int_input
+    book_number = get_user_selection('Number')
     puts 'Select a Person from the following list by number'
     @persons.each_with_index do |person, index|
       puts " #{index}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
     end
-    person_number = Inputs.new.int_input
+    person_number = get_user_selection('Number')
     print 'Date: '
-    date = Inputs.new.str_input
-    @rentals << Rental.new(date, @books[book_number], @persons[person_number])
+    date = get_user_selection('String')
+    create_rental(date, book_number, person_number)
     puts "Rental created successfully \n\n"
+  end
+
+  def get_user_selection(input_type)
+    return Inputs.new.int_input if input_type == 'Number'
+
+    Inputs.new.str_input
+  end
+
+  def create_rental(date, book_number, person_number)
+    @rentals << Rental.new(date, @books[book_number], @persons[person_number])
   end
 
   def list_rentals
