@@ -4,6 +4,7 @@ require './person'
 require './rental'
 require './student'
 require './teacher'
+require './inputs'
 
 class App
   def initialize
@@ -29,21 +30,21 @@ class App
     puts '1. Student'
     puts '2. Teacher'
     print 'Enter selection: '
-    person_type = gets.chomp.to_i
+    person_type = Inputs.new.int_input()
     print 'Name: '
-    name = gets.chomp
+    name = Inputs.new.str_input()
     print 'Age : '
-    age = gets.chomp.to_i
+    age = Inputs.new.int_input()
     case person_type
     when 1
       print 'Has parent permission? [Y/N]: '
-      permission = gets[0]
-      permission = (permission == ('Y' || 'y'))
+      permission = Inputs.new.bol_input
+      permission = (permission == 'Y' )
       @persons << Student.new('Unkown', age, name, parent_permission: permission)
       puts "Person created successfully \n\n"
     when 2
       print 'Specialization: '
-      specialization = gets.chomp
+      specialization = Inputs.new.str_input()
       @persons << Teacher.new(specialization, age, name)
       puts "Person created successfully\n\n"
     end
@@ -52,9 +53,9 @@ class App
   def create_book
     puts 'Create a book'
     print 'Title: '
-    title = gets.chomp
+    title = Inputs.new.str_input()
     print 'Author: '
-    author = gets.chomp
+    author = Inputs.new.str_input()
     @books << Book.new(title, author)
     puts "Book created successfully\n\n"
   end
@@ -63,14 +64,14 @@ class App
     puts 'Create rental'
     puts 'Select a book from the following list by number'
     @books.each_with_index { |book, index| puts "#{index}) Title: \"#{book.title}\", Author: #{book.author}" }
-    book_number = gets.chomp.to_i
+    book_number = Inputs.new.int_input()
     puts 'Select a Person from the following list by number'
     @persons.each_with_index do |person, index|
       puts " #{index}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
     end
-    person_number = gets.chomp.to_i
+    person_number = Inputs.new.int_input()
     print 'Date: '
-    date = gets.chomp
+    date = Inputs.new.str_input()
     @rentals << Rental.new(date, @books[book_number], @persons[person_number])
     puts "Rental created successfully \n\n"
   end
@@ -78,7 +79,7 @@ class App
   def list_rentals
     puts 'List all rentals'
     print 'Enter ID of person: '
-    person_id = gets.chomp
+    person_id = Inputs.new.str_input()
     puts 'Rentals : '
     @rentals.each do |rent|
       if rent.person.id.to_s == person_id.to_s
