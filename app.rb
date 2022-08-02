@@ -6,7 +6,10 @@ require './student'
 require './teacher'
 require './inputs'
 
+
 class App
+  attr_accessor :persons, :books, :rentals
+  
   def initialize
     @persons = []
     @books = []
