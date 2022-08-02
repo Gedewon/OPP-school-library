@@ -23,13 +23,15 @@ def save_rental(app)
 end
 
 
-def read_person
+def read_person(app)
   persons = JSON.parse(File.read('person.json'))
   persons.each do |person|
-    if person.type == 'Student'
-      @persons << Student.new('Unkown', person.age, person.name, person.parent_permission: permission)
+    if person.key?('Student')
+      student = Student.new('Unkown', person['age'], person['name'], person['permission'])
+      app.persons.push(student)
     else
-      @persons << Teacher.new(person.specialization, person.age, person.name)
+      teacher = Teacher.new(person['specialization'], person['age'], person['name'])
+      app.persons.push(teacher)
     end
   end
 end

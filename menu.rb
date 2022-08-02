@@ -13,6 +13,7 @@ class Menu
   end
 
   def print_menu(app) # rubocop:disable Metrics/CyclomaticComplexity
+     read_person(app)
     loop do
       menu
       input = user_input
