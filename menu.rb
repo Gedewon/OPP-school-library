@@ -26,6 +26,7 @@ class Menu
       when 6 then app.list_rentals
       else 
        save_person(app) 
+       save_rental(app)
       break
       end
       break unless input.positive? && input < 8
