@@ -16,11 +16,7 @@ class App
     @books = []
     @rentals = []
   end
-<<<<<<< HEAD
  
-=======
-  read_person(@persons)
->>>>>>> 994f3b2c642bea0c61d0bfd781f31f745183a6d6
   def list_books
     puts 'List of all books'
     @books.each { |book| puts "Title: \"#{book.title}\", Author: #{book.author}" }

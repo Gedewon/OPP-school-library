@@ -2,6 +2,11 @@ require 'fileutils'
 require 'json'
 require './app'
 
+def on_exit(app)
+  save_person(app)
+  save_rental(app)
+end
+
 def save_person(app)
   persons = []
   app.persons.each do |person|
@@ -20,6 +25,17 @@ def save_book(app)
 end
 
 def save_rental(app)
+  rentals = []
+  app.rentals.each do |rental|
+  st = {date: rental.date,  book:rental.person.title, person:rental.book.name}
+  rentals.push(st)
+  end
+     File.write('rentals.json', JSON.generate(rentals))
+end
+
+
+def on_start(app)
+  read_person(app)
 end
 
 
