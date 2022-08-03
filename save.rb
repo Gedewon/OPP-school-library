@@ -49,3 +49,10 @@ def read_person(app)
     end
   end
 end
+
+
+def read_rental(arr)
+  puts arr
+  rentals = JSON.parse(File.read('rentals.json'))
+  puts rentals
+end
