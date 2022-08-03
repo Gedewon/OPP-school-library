@@ -8,6 +8,7 @@ require './inputs'
 
 
 
+
 class App
   attr_accessor :persons, :books, :rentals
   
@@ -16,7 +17,7 @@ class App
     @books = []
     @rentals = []
   end
- 
+
   def list_books
     puts 'List of all books'
     @books.each { |book| puts "Title: \"#{book.title}\", Author: #{book.author}" }
