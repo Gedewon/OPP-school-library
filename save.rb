@@ -2,9 +2,9 @@ require 'fileutils'
 require 'json'
 require './app'
 
-
 def on_exit(app)
   save_person(app)
+  save_books(app)
   save_rental(app)
 end
 
@@ -12,35 +12,46 @@ def save_person(app)
   persons = []
   app.persons.each do |person|
     if person.class.to_s == 'Student'
-      st = {name: person.name, age: person.age, permission: person.parent_permission, type: person.class}
+      st = { name: person.name, age: person.age, permission: person.parent_permission, type: person.class }
       persons.push(st)
     else
-      teacher = {name: person.name, age: person.age, specialization: person.specialization, type: person.class}
+      teacher = { name: person.name, age: person.age, specialization: person.specialization, type: person.class }
       persons.push(teacher)
     end
   end
-     File.write('person.json', JSON.generate(persons))
+  File.write('person.json', JSON.generate(persons))
 end
 
-def save_book(app)
+def save_books(app)
+  books = []
+  app.books.each do |book|
+    book = { title: book.title, author: book.author }
+    books.push(book)
+  end
+  File.write('books.json', JSON.generate(books))
+end
+
+def read_books(app)
+  books = JSON.parse(File.read('books.json'))
+  books.each do |book|
+    book = Book.new(book['title'], book['author'])
+    app.books.push(book)
+  end
 end
 
 def save_rental(app)
   rentals = []
   app.rentals.each do |rental|
-  st = {date: rental.date,  book:rental.person.title, person:rental.book.name}
-  rentals.push(st)
+    st = { date: rental.date, book: rental.person.title, person: rental.book.name }
+    rentals.push(st)
   end
-     File.write('rentals.json', JSON.generate(rentals))
+  File.write('rentals.json', JSON.generate(rentals))
 end
-
-
-
 
 def read_person(app)
   persons = JSON.parse(File.read('person.json'))
   persons.each do |person|
-    if person['type'] =='Student'
+    if person['type'] == 'Student'
       student = Student.new('Unkown', person['age'], person['name'], parent_permission: person['permission'])
       app.persons.push(student)
     else
@@ -49,7 +60,6 @@ def read_person(app)
     end
   end
 end
-
 
 def read_rental(arr)
   puts arr

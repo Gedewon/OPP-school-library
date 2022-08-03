@@ -14,6 +14,7 @@ class Menu
 
   def print_menu(app) # rubocop:disable Metrics/CyclomaticComplexity
     read_person(app)
+    read_books(app)
     loop do
       menu
       input = user_input
@@ -24,9 +25,9 @@ class Menu
       when 4 then app.promte_create_book
       when 5 then app.promte_create_rental
       when 6 then app.list_rentals
-      else 
-      on_exit(app)
-      break
+      else
+        on_exit(app)
+        break
       end
       break unless input.positive? && input < 8
     end

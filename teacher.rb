@@ -1,7 +1,7 @@
 require './person'
 
 class Teacher < Person
-attr_accessor :specialization
+  attr_accessor :specialization
 
   def initialize(specialization, age, name = 'Unknown')
     super(age, name)
