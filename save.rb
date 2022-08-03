@@ -5,7 +5,6 @@ require './app'
 def on_exit(app)
   save_person(app)
   save_books(app)
-  save_rental(app)
 end
 
 def save_person(app)
@@ -39,13 +38,11 @@ def read_books(app)
   end
 end
 
-def save_rental(app)
-  rentals = []
-  app.rentals.each do |rental|
-    st = { date: rental.date, book: rental.person.title, person: rental.book.name }
+def save_rental(date, book_number, person_number)
+  rentals = JSON.parse(File.read('rentals.json'))
+    st = { date: date, person_number: person_number, book_number: book_number }
     rentals.push(st)
-  end
-  File.write('rentals.json', JSON.generate(rentals))
+  File.write('rentals.json', rentals.to_json)
 end
 
 def read_person(app)
@@ -61,8 +58,10 @@ def read_person(app)
   end
 end
 
-def read_rental(arr)
-  puts arr
-  rentals = JSON.parse(File.read('rentals.json'))
-  puts rentals
+def read_rental(app)
+   rentals = JSON.parse(File.read('rentals.json'))
+  rentals.each do |rental|
+    rental = Rental.new(rental['date'],app.books[ rental['book_number']],app.persons[ rental['person_number']])
+    app.rentals.push(rental)
+  end
 end

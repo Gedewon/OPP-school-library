@@ -15,6 +15,7 @@ class Menu
   def print_menu(app) # rubocop:disable Metrics/CyclomaticComplexity
     read_person(app)
     read_books(app)
+    read_rental(app)
     loop do
       menu
       input = user_input
