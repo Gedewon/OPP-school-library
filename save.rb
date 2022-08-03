@@ -53,19 +53,6 @@ def read_person(app)
 end
 
 
-def read_person(arr)
-  puts arr
-  # persons = JSON.parse(File.read('person.json'))
-  # persons.each do |person|
-   
-  #   if person["type"] == 'Student'
-  #     arr << Student.new( person['age'], person['name'], person['permission'] )
-  #   else
-  #     arr << Teacher.new(person.specialization, person.age, person.name)
-  #   end
-  # end
-end
-
 def read_rental(arr)
   puts arr
   rentals = JSON.parse(File.read('rentals.json'))
