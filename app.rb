@@ -5,7 +5,7 @@ require './rental'
 require './student'
 require './teacher'
 require './inputs'
-require './save'
+
 
 
 class App
@@ -16,7 +16,7 @@ class App
     @books = []
     @rentals = []
   end
-  read_person(@persons)
+ 
   def list_books
     puts 'List of all books'
     @books.each { |book| puts "Title: \"#{book.title}\", Author: #{book.author}" }

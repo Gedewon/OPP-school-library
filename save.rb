@@ -2,6 +2,11 @@ require 'fileutils'
 require 'json'
 require './app'
 
+def on_exit(app)
+  save_person(app)
+  save_rental(app)
+end
+
 def save_person(app)
   persons = []
   app.persons.each do |person|
@@ -26,6 +31,25 @@ def save_rental(app)
   rentals.push(st)
   end
      File.write('rentals.json', JSON.generate(rentals))
+end
+
+
+def on_start(app)
+  read_person(app)
+end
+
+
+def read_person(app)
+  persons = JSON.parse(File.read('person.json'))
+  persons.each do |person|
+    if person.key?('Student')
+      student = Student.new('Unkown', person['age'], person['name'], person['permission'])
+      app.persons.push(student)
+    else
+      teacher = Teacher.new(person['specialization'], person['age'], person['name'])
+      app.persons.push(teacher)
+    end
+  end
 end
 
 
