@@ -1,5 +1,5 @@
-require '../book'
-require '../rental'
+require_relative '../book'
+require_relative '../rental'
 
 describe Book do
   context 'Create a book' do
