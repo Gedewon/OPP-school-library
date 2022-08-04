@@ -1,5 +1,11 @@
 class Nameable
   def correct_name
-    raise NotImplemtedError, "#{self.class} has not implemented method '#{__method__}'"
+    raise 'NotImplemtedError'
   end
 end
+
+class NameError < Nameable
+end
+
+error = NameError.new
+error.correct_name
