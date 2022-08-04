@@ -1,6 +1,5 @@
 require_relative '../spec_helper'
 
-
 describe Student do
   context 'Create a Student' do
     it 'Should return person name' do
