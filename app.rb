@@ -7,10 +7,13 @@ require './teacher'
 require './inputs'
 
 class App
+  attr_accessor :persons, :books, :rentals
+
   def initialize
     @persons = []
     @books = []
     @rentals = []
+    @arr = []
   end
 
   def list_books
@@ -80,6 +83,7 @@ class App
     person_number = get_user_selection('Number')
     print 'Date: '
     date = get_user_selection('String')
+    save_rental(date, book_number, person_number)
     create_rental(date, book_number, person_number)
     puts "Rental created successfully \n\n"
   end
