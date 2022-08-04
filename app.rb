@@ -13,7 +13,7 @@ class App
     @persons = []
     @books = []
     @rentals = []
-    @arr=[]
+    @arr = []
   end
 
   def list_books
@@ -83,13 +83,14 @@ class App
     person_number = get_user_selection('Number')
     print 'Date: '
     date = get_user_selection('String')
-    save_rental(date,book_number,person_number)
+    save_rental(date, book_number, person_number)
     create_rental(date, book_number, person_number)
     puts "Rental created successfully \n\n"
   end
 
   def get_user_selection(input_type)
     return Inputs.new.int_input if input_type == 'Number'
+
     Inputs.new.str_input
   end
 

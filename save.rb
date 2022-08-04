@@ -18,6 +18,7 @@ def save_person(app)
       persons.push(teacher)
     end
   end
+  File.new('person.json') unless File.exist?('person.json')
   File.write('person.json', JSON.generate(persons))
 end
 
@@ -31,6 +32,8 @@ def save_books(app)
 end
 
 def read_books(app)
+  File.write('books.json', JSON.generate([])) unless File.exist?('books.json')
+
   books = JSON.parse(File.read('books.json'))
   books.each do |book|
     book = Book.new(book['title'], book['author'])
@@ -40,12 +43,14 @@ end
 
 def save_rental(date, book_number, person_number)
   rentals = JSON.parse(File.read('rentals.json'))
-    st = { date: date, person_number: person_number, book_number: book_number }
-    rentals.push(st)
+  st = { date: date, person_number: person_number, book_number: book_number }
+  rentals.push(st)
   File.write('rentals.json', rentals.to_json)
 end
 
 def read_person(app)
+  File.write('person.json', JSON.generate([])) unless File.exist?('person.json')
+
   persons = JSON.parse(File.read('person.json'))
   persons.each do |person|
     if person['type'] == 'Student'
@@ -59,9 +64,11 @@ def read_person(app)
 end
 
 def read_rental(app)
-   rentals = JSON.parse(File.read('rentals.json'))
+  File.write('rentals.json', JSON.generate([])) unless File.exist?('rentals.json')
+
+  rentals = JSON.parse(File.read('rentals.json'))
   rentals.each do |rental|
-    rental = Rental.new(rental['date'],app.books[ rental['book_number']],app.persons[ rental['person_number']])
+    rental = Rental.new(rental['date'], app.books[rental['book_number']], app.persons[rental['person_number']])
     app.rentals.push(rental)
   end
 end
