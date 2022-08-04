@@ -1,1 +1,1 @@
-[{"name":"Jack","age":16,"permission":true,"type":"Student"}]
+[{"name":"John","age":45,"permission":true,"type":"Student"},{"name":"Jane","age":78,"specialization":"Programmer","type":"Teacher"}]
