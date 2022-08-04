@@ -1,6 +1,6 @@
-require './nameable'
 require './capitalize_decorator'
 require './trimmer_decorator'
+require './nameable'
 
 class Person < Nameable
   attr_accessor :name, :age, :rentals
